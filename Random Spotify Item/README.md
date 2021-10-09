@@ -1,0 +1,1 @@
+Selects a random Spotify item (artist, track, playlist, etc)

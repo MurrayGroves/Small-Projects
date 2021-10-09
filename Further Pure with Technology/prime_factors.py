@@ -33,7 +33,6 @@ def prime_factors(my_int: int) -> list:
     factors = []
     while my_int != 1:
         for i in prime_range(2, int(my_int//2)+2):
-            print(i)
             if my_int % i == 0:
                 my_int /= i
                 factors.append(i)
@@ -92,14 +91,10 @@ def lcm(first: int, second: int) -> int:
 def is_coprime(first: int, second: int) -> bool:
     force_positive(first, second)
 
-    first_factors = prime_factors(first)
-    second_factors = prime_factors(second)
+    if hcf(first, second) == 1:
+        return True
 
-    for i in first_factors:
-        if i in second_factors:
-            return False
-
-    return True
+    return False
 
 
 # Provide solutions to ax+b = c mod n
@@ -112,6 +107,3 @@ def solve(a: int, b: int, c: int, n: int) -> list:
             solutions.append(int((c + i*n) / a))
 
     return solutions
-
-
-print(lcm(12, 15))

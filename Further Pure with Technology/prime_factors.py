@@ -42,22 +42,20 @@ def prime_factors(my_int: int) -> list:
     return sorted(factors)
 
 
-# Find the highest common factor of two integers
-def hcf(first: int, second: int) -> int:
-    force_positive(first, second)
+# Find the highest common factor of two integers via the euclidean algorithm
+def hcf(a: int, b: int) -> int:
+    force_positive(a, b)
+    if a < b:
+        a, b = b, a
 
-    first_factors = prime_factors(first)
-    second_factors = prime_factors(second)
+    while True:
+        remainder = a % b
+        if remainder == 0:
+            return b
 
-    factors = first_factors if len(first_factors) < len(second_factors) else second_factors
-    factors2 = first_factors if factors == second_factors else second_factors
+        a = b
+        b = remainder
 
-    highest = 1
-    for i in factors:
-        if i in factors2:
-            highest *= i
-
-    return highest
 
 
 # Find the lowest common multiple of two integers
@@ -107,3 +105,27 @@ def solve(a: int, b: int, c: int, n: int) -> list:
             solutions.append(int((c + i*n) / a))
 
     return solutions
+
+
+# Find all positive integers, n, smaller than m, where n is composite, and 2^(n-1) = 1 (mod n)
+def N3_Q3(m):
+    composites = list(range(m))
+    primes = prime_range(0, m)
+    for i in primes:
+        composites.pop(composites.index(i))
+
+    solutions = []
+    for i in composites:
+        if (2**(i-1)) % i == 1:
+            solutions.append(i)
+
+    return solutions
+
+
+def phi(n):
+    count = 0
+    for i in range(1, n):
+        if is_coprime(i, n):
+            count += 1
+
+    return count

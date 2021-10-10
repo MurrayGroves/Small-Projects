@@ -12,4 +12,12 @@ def diophantine(a, b, c):
     return solutions
 
 
-print(diophantine(2, 3, 54))
+def diophantine_mod(a, b, c, d):
+    solutions = []
+    for x in range(0, d):
+        for y in range(0, d):
+            if (x*a + y*b) % d == c:
+                solutions.append((x, y))
+
+
+    return solutions

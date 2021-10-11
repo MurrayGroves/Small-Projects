@@ -1,3 +1,5 @@
+import math
+
 # Raise error if arguments aren't positive
 def force_positive(*args):
     for arg in args:
@@ -55,7 +57,6 @@ def hcf(a: int, b: int) -> int:
 
         a = b
         b = remainder
-
 
 
 # Find the lowest common multiple of two integers
@@ -129,3 +130,40 @@ def phi(n):
             count += 1
 
     return count
+
+
+# Find values of x and y for ax + by = c
+def diophantine(a, b, c):
+    solutions = []
+    for x in range(0, c + 1, a):
+        for y in range(0, c + 1, b):
+            if x + y == c:
+                solutions.append((x // a, y // b))
+
+            elif x + y > c:
+                break
+
+    return solutions
+
+
+def diophantine_mod(a, b, c, d):
+    solutions = []
+    for x in range(0, d):
+        for y in range(0, d):
+            if (x * a + y * b) % d == c:
+                solutions.append((x, y))
+
+    return solutions
+
+
+# Find solutions for x^a + y^b = z^c where x,y,z are integers
+def non_linear_diophantine(a=2, b=2, c=2, max_z=100):
+    solutions = []
+    for z in range(max_z):
+        target = z**c
+        for x in range(z):
+            for y in range(x,z):
+                if x**a + y**b == target and is_coprime(x, y):
+                    solutions.append((x, y, z))
+
+    return solutions

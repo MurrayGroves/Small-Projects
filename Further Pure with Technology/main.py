@@ -167,3 +167,11 @@ def non_linear_diophantine(a=2, b=2, c=2, max_z=100):
                     solutions.append((x, y, z))
 
     return solutions
+
+
+# Find solution to x^2 - ny^2 = -1
+def negative_pells(n, m):
+    for x in range(m):
+        for y in range(m):
+            if (x**2) - (n*(y**2)) == -1:
+                return x, y
